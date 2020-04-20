@@ -1,0 +1,59 @@
+#include <iostream>
+#include <stdlib.h> //lib para limpar a tela
+#include <locale.h> //lib para passar para português
+#include <string.h>
+#include <math.h>
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "Portuguese"); //Atribuição do portugues
+    //Minha mensagem no menu, endl significa quebra da linha
+    int valor;
+    cout << "Minha *Calculadora* de Bases" << endl;
+    cout << "Informe uma das opções" << endl;
+    cout << "1- Decimal para Binário" << endl;
+    cout << "2- Binário para Decimal" << endl;
+
+    //Aqui faço a leitura do valor digitado
+    cin >> valor;
+    system("clear||cls");// Aqui limpo a tela
+    //cout << endl << "O valor digitado foi: " << valor << endl;
+    if(valor == 1){
+        char binario[100], decimal[100];
+        int resto, i, c = 0, num_decimal;
+        int a = 0;
+        char binario_final[100];
+        cout << "1 - Conversão de Decimal para Binário " << endl;
+        cin >> decimal;
+        num_decimal = atoi(decimal); //converte a variavel decimal para uma variavel int
+        while (num_decimal > 0){
+            resto = num_decimal % 2; //pega o resto da divisao por 2
+            binario[c] = resto + '0'; //converte a variavel resto para char e coloca no vetor atual
+            num_decimal = num_decimal / 2; //divide por 2 de acordo com a conversão até virar 0
+            c++;
+        }
+
+        for (i = strlen(binario)-1; i >= 0; i--){//conta o numero de vetores de binario para inverter o vetor
+            binario_final[a] = binario[i]; //coloca o ultimo vetor de binario no primeiro vetor de binario final
+            a++;
+        }
+
+        cout << endl << "O valor em binário é: " << binario_final << endl;
+    }else{
+        if(valor == 2){
+            char binario[100]; //o numero será salvo char para poder fazer a contagem de caracteres
+            int decimal = 0, cont = 0; //cont servira para pegar a posição correta de cada numero do binaro[100]
+            cout << "2 - Conversão de Binário para Decimal" << endl;
+            cin >> binario;
+            for(int i = strlen(binario)-1; i >=0; i--){//função strlen verifica quandos caracteres tem o número digitado em char e armazena em i para fazer a potencia
+                int bin = binario[cont] - '0'; //pega o número correspondente a casa de binario[cont] e converte para inteiro
+                decimal = decimal + pow(2, i) * bin; //calculo de binario para decimal
+                cont++; //contador soma para pegar a próxima casa de binaro[cont]
+            }
+            cout << endl << "O valor em decimal é: " << decimal << endl;
+        }else{
+            cout << "Favor entre com um valor válido!!! " << endl;
+        }
+    }
+    return 0;
+}
